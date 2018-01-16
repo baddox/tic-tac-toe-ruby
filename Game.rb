@@ -115,6 +115,14 @@ class Game
     return nil
   end
 
+  def to_s
+    %{<Game #{@size}x#{@size}>}
+  end
+
+  def inspect
+    current_board.inspect
+  end
+
   def self.winner_of_cells(cells)
     if cells.uniq.size == 1 && !cells.first.empty?
       cells.first

@@ -30,7 +30,7 @@ class GameConsole
         # we get a valid and legal one.
         begin
           column, row = player_to_move.
-                        choose_column_and_row(@game.current_board)
+                        choose_column_and_row(@game)
           @game = @game.with_move(column, row)
           puts
           break

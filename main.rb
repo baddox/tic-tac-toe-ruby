@@ -1,7 +1,9 @@
-require_relative "board.rb"
-require_relative "player.rb"
+require_relative "Board.rb"
 require_relative "GameConsole"
 require_relative "iterators"
+require_relative "players/Player"
+require_relative "players/HumanPlayer"
+require_relative "players/MinimaxPlayer"
 
 # TODOS / ideas !!!
 <<-TODOS
@@ -78,39 +80,10 @@ if true
   p1 = HumanPlayer.new('Thomas')
   p2 = HumanPlayer.new('Madeline')
 
-  # tie
-  p1 = Autobot.new('Thomas', [
-                     [1, 1],
-                     [3, 3],
-                     [2, 3],
-                     [3, 1],
-                     [1, 2],
-                   ])
-  p2 = Autobot.new('Madeline', [
-                     [2, 2],
-                     [2, 1],
-                     [1, 3],
-                     [3, 2],
-                   ])
-
-
-  # quick Madeline victory
-  p1 = Autobot.new('Thomas', [
-                     [1, 1],
-                     [3, 2],
-                     [1, 3],
-                     [3, 3],
-                   ])
-  p2 = Autobot.new('Madeline', [
-                     [2, 1],
-                     [2, 2],
-                     [2, 3],
-                   ])
-
   p1 = HumanPlayer.new('Thomas')
-  p2 = RandomPlayer.new('RANDO')
+  p2 = MinimaxPlayer.new('HAL')
 
-  GameConsole.new(4, p1, p2).run
+  GameConsole.new(3, p2, p1).run
 end
 
 if false
@@ -136,12 +109,15 @@ end
 
 if false
   b = Board.from_strings(
-    'oo..',
-    '....',
-    '....',
-    '...x',
+    'oo.',
+    '.x.',
+    '.xx',
   )
 
-  p b.candidate_boards
-  p b.canonicalize
+  g = Game.new(3, [b])
+
+  p g
+  puts
+  g.valid_next_games.each {|ng| p ng; puts}
 end
+
